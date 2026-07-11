@@ -1,3 +1,4 @@
 *.sw*
 *.o
-megaphone
+ex00/megaphone
+ex01/PhoneBook
