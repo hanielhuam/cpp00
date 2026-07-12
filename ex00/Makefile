@@ -5,7 +5,7 @@ OBJ_DIR = obj
 
 SRCS = ${SRC_DIR}/megaphone.cpp
 
-OBJS = $(SRCS:${SRC_DIR}/%.c=${OBJ_DIR}/%.o)
+OBJS = $(SRCS:${SRC_DIR}/%.cpp=${OBJ_DIR}/%.o)
 
 NAME = megaphone
 
