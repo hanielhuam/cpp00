@@ -6,18 +6,18 @@
 /*   By: hmacedo- <hanielhuam@hotmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 14:59:46 by hmacedo-          #+#    #+#             */
-/*   Updated: 2026/07/13 23:57:09 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2026/07/14 19:35:26 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "Contact.h"
+#include "Contact.hpp"
 #include <string>
 
 # define BOOK_SIZE 8
 
-class PhoneBokk
+class PhoneBook
 {
 	private:
 		int		_size;

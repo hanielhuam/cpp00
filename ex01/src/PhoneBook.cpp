@@ -6,32 +6,33 @@
 /*   By: hmacedo- <hanielhuam@hotmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 14:56:11 by hmacedo-          #+#    #+#             */
-/*   Updated: 2026/07/13 23:57:03 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2026/07/14 19:51:36 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 #include <iostream>
+#include <iomanip>
 
 PhoneBook::PhoneBook(void)
 {
 	this->_size = 0;
 }
 
-std::string	getFieldInput(string err)
+std::string	getFieldInput(std::string err)
 {
 	std::string	input;
 
-	std::getLine(std::cin, input);
+	std::getline(std::cin, input);
 	while (input.empty())
 	{
-		std::cout << "This Phone Book don't acept enpty input. " << err << endl;
-		std::getLine(std::cin, input);
+		std::cout << "This Phone Book don't acept enpty input. " << err << std::endl;
+		std::getline(std::cin, input);
 	}
 	return (input);
 }
 
-static Contact::Contact	buildContac(void)
+static Contact	buildContact(void)
 {
 	std::string firstName;
 	std::string lastName;
@@ -40,7 +41,7 @@ static Contact::Contact	buildContac(void)
 	std::string secreet;
 
 	std::cout << "insert first name" << std::endl;
-	fisrtName = getFieldInput("Enter the contact first name again");
+	firstName = getFieldInput("Enter the contact first name again");
 	std::cout << "insert last name" << std::endl;
 	lastName = getFieldInput("Enter the contact last name again");
 	std::cout << "insert nick name" << std::endl;
@@ -52,35 +53,35 @@ static Contact::Contact	buildContac(void)
 	return (Contact(firstName, lastName, nickName, phoneNumber, secreet));
 }
 
-void	createContact(void)
+void	PhoneBook::createContact(void)
 {
 	Contact	contact;
 	contact = buildContact();
-	this->book[this->size % BOOK_SIZE] = contact;
+	this->_book[this->_size % BOOK_SIZE] = contact;
 }
 
 void	printLine(std::string data)
 {
 	if (data.size() > 10)
 		data = data.substr(0,9).append(".");
-	cout << "|" << std::setw(10) << data;
+	std::cout << "|" << std::setw(10) << data;
 }
 
-void	showAllContacts(void)
+void	PhoneBook::showAllContacts(void)
 {
 	std::cout << "|----------|----------|----------|----------|" << std::endl;
 	std::cout << "|    ID    |FIRST NAME|LAST NAME |NICK NAME |" << std::endl;
 	std::cout << "|----------|----------|----------|----------|" << std::endl;
 	for (int i = 0; i < this->_size && i < BOOK_SIZE; i++)
 	{
-		printLine(std::to_string(i + 1));
-		printLine(std::this->book[i].getFirstName());
-		printLine(std::this->book[i].getlastName());
-		printLine(std::this->book[i].getNickName());
+		std::cout << "|" << i + 1 << "         ";
+		printLine(this->_book[i].getFirstName());
+		printLine(this->_book[i].getLastName());
+		printLine(this->_book[i].getNickName());
 		std::cout << "|" << std::endl;
 	}
-	if (this
-	std::cout << "|__________|__________|__________|__________|" << std::emdl;
+	if (this->_size >  0)
+		std::cout << "|__________|__________|__________|__________|" << std::emdl;
 }
 
 int	getInputId(int size)
@@ -89,25 +90,25 @@ int	getInputId(int size)
 	std::string	input;
 	
 	std::cout << std::endl << "Enter a ID number:" << std::endl;
-	std::getLine(std::cin, input);
+	std::getline(std::cin, input);
 	id = std::stoi(input);
 	while (id > 0 && id < size && id < BOOK_SIZE)
 	{
 		std::cout << "invalid ID. Please enter a valid ID:" << std::endl;
-		std::getLine(std::cin, input);
+		std::getline(std::cin, input);
 		id = std::stoi(input);
 	}
 	return (id);
 }
 
 
-void	serch(void)
+void	PhoneBook::serch(void)
 {
 	int			id;
 
 	showAllContacts();
-	if (this->size == 0)
+	if (this->_size == 0)
 		return ;
 	id = getInputId(this._size);
-	this->book[id - 1].showContact();
+	this->_book[id - 1].showContact();
 }
