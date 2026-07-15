@@ -13,11 +13,14 @@
 #include "PhoneBook.hpp"
 #include <iostream>
 #include <iomanip>
+#include <cstdlib>
 
 PhoneBook::PhoneBook(void)
 {
 	this->_size = 0;
 }
+
+PhoneBook::~PhoneBook(void){}
 
 std::string	getFieldInput(std::string err)
 {
@@ -58,6 +61,7 @@ void	PhoneBook::createContact(void)
 	Contact	contact;
 	contact = buildContact();
 	this->_book[this->_size % BOOK_SIZE] = contact;
+	this->_size++;
 }
 
 void	printLine(std::string data)
@@ -74,14 +78,14 @@ void	PhoneBook::showAllContacts(void)
 	std::cout << "|----------|----------|----------|----------|" << std::endl;
 	for (int i = 0; i < this->_size && i < BOOK_SIZE; i++)
 	{
-		std::cout << "|" << i + 1 << "         ";
+		std::cout << "|         " << i + 1;
 		printLine(this->_book[i].getFirstName());
 		printLine(this->_book[i].getLastName());
 		printLine(this->_book[i].getNickName());
 		std::cout << "|" << std::endl;
 	}
 	if (this->_size >  0)
-		std::cout << "|__________|__________|__________|__________|" << std::emdl;
+		std::cout << "|__________|__________|__________|__________|" << std::endl;
 }
 
 int	getInputId(int size)
@@ -91,24 +95,24 @@ int	getInputId(int size)
 	
 	std::cout << std::endl << "Enter a ID number:" << std::endl;
 	std::getline(std::cin, input);
-	id = std::stoi(input);
-	while (id > 0 && id < size && id < BOOK_SIZE)
+	id = atoi(input.c_str());
+	while (id < 1 || id > size || id > BOOK_SIZE)
 	{
 		std::cout << "invalid ID. Please enter a valid ID:" << std::endl;
 		std::getline(std::cin, input);
-		id = std::stoi(input);
+		id = std::atoi(input.c_str());
 	}
 	return (id);
 }
 
 
-void	PhoneBook::serch(void)
+void	PhoneBook::search(void)
 {
 	int			id;
 
 	showAllContacts();
 	if (this->_size == 0)
 		return ;
-	id = getInputId(this._size);
+	id = getInputId(this->_size);
 	this->_book[id - 1].showContact();
 }

@@ -16,12 +16,11 @@
 int	main(void)
 {
 	PhoneBook	book;
+	std::string	input;
 
-	book = PhoneBook();
-	book.serach();
-	book.createContact();
-	book.search();
-	book.createContact();
-	book.search();
+
+	std::cout << "Hello!! i'am your phone book" << std::endl;
+	
+	while ()
 	return (0);
 }
