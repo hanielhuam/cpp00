@@ -12,15 +12,27 @@
 
 #include "Contact.hpp"
 #include "PhoneBook.hpp"
+#include <string>
+#include <iostream>
+#include <iomanip>
 
 int	main(void)
 {
 	PhoneBook	book;
 	std::string	input;
 
-
+	input = "nada";
 	std::cout << "Hello!! i'am your phone book" << std::endl;
-	
-	while ()
+	while (input.compare("EXIT") && input.compare("exit"))
+	{
+		std::cout << "Write what do you want:" << std::endl;
+		std::cout << "ADD or SEARCH" << std::endl;
+		std::getline(std::cin, input);
+		if (!input.compare("ADD") || !input.compare("add"))
+			book.createContact();
+		if (!input.compare("SEARCH") || !input.compare("search"))
+			book.search();
+	}
+	std::cout << "bye bye, see you later" << std::endl;
 	return (0);
 }
